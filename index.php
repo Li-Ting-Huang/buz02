@@ -18,12 +18,12 @@
 	<iframe name="back" style="display:none;"></iframe>
 	<div id="all">
 		<div id="title">
-			<?=
-			date(" m 月 d 號 l");
-			?>
+			<?=date(" m 月 d 號 l");?>
+			<a href="index.php" style="float:right">回首頁</a>
 		</div>
-		<div id="title2">
-
+		<div id="title2" title="健康促進網-回首頁" onclick="location.href='index.php'">
+			<img src="./icon/02B01.jpg" alt="" >
+			
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
@@ -37,7 +37,7 @@
 				<div>
 
 					<marquee style="width:80%; display:inline-block;">
-						請民眾踴躍投稿電子報，讓電自爆成為大家相互交流、分享的園地!詳見最新文章<a href="?do=login">會員登入</a>
+						請民眾踴躍投稿電子報，讓電自爆成為大家相互交流、分享的園地!詳見最新文章
 					</marquee>
 					<span style="width:18%; display:inline-block;">
 						<a href="?do=login">會員登入</a>
