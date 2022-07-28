@@ -18,12 +18,15 @@
 	<iframe name="back" style="display:none;"></iframe>
 	<div id="all">
 		<div id="title">
-			<?=date(" m 月 d 號 l");?>
+			<!-- 建立現在時間 -->
+			<?= date(" m 月 d 號 l"); ?>
+			<!-- 建立回首頁 -->
 			<a href="index.php" style="float:right">回首頁</a>
 		</div>
+		<!-- 建banner -->
 		<div id="title2" title="健康促進網-回首頁" onclick="location.href='index.php'">
-			<img src="./icon/02B01.jpg" alt="" >
-			
+			<img src="./icon/02B01.jpg" alt="">
+
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
