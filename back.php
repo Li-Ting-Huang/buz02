@@ -1,6 +1,6 @@
 ﻿<?php
 include_once "base.php";
-// 判斷如果不是會員的都不能進後台
+// 判斷不但是要會員爾且還是admin才能進入後台
 if (!isset($_SESSION['user']) or $_SESSION['user'] !== 'admin') {
 	to("index.php");
 	exit();
