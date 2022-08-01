@@ -19,3 +19,9 @@ function good(id,type,user)
 		}
 	})
 }
+// 登出功能
+function logout(){
+	$.get("./api/logout.php",()=>{
+		location.reload()//重讀頁面
+	})
+}

@@ -38,21 +38,42 @@ include_once "./base.php";
 			<div class="hal" id="main">
 				<div>
 					<!-- marquee加入寬度 -->
-					<marquee  style="width:80%; display:inline-block;">請民眾踴躍投稿電子報，讓電子報成為大家互相交流、分享的園地!詳見最新文章</marquee>
+					<marquee style="width:80%; display:inline-block;">請民眾踴躍投稿電子報，讓電子報成為大家互相交流、分享的園地!詳見最新文章</marquee> 
 					<span style="width:18%; display:inline-block;">
+						<!-- 判斷登入狀態並顯示 -->
+						<?php
+						if (isset($_SESSION['user'])) {	
+							//管理者顯示
+							if($_SESSION['user']==='admin'){
+							?>
+							歡迎，<?=$_SESSION['user']?>
+							<button onclick="logout()">登出</button>
+							<!-- 管理者顯示end -->
+							<?php
+							}else{//不是管理者顯示
+						?>
+						歡迎，<?=$_SESSION['user']?>
+						<button onclick="logout()">登出</button>
+						<?php
+						}//不是管理者顯示end
+						}else{
+						?>
 						<a href="?do=login">會員登入</a>
+						<?php
+						}
+						?>
 					</span>
 					<div class="content">
 						<?php
-							// $do=isset($_GET['do'])?$_GET['do']:'main';
-							$do=$_GET['do']??'main';
-							$file="./front/".$do.".php";
-							
-							if(file_exists($file)){
-								include $file;
-							}else{
-								include "./front/main.php";
-							}
+						// $do=isset($_GET['do'])?$_GET['do']:'main';
+						$do = $_GET['do'] ?? 'main';
+						$file = "./front/" . $do . ".php";
+
+						if (file_exists($file)) {
+							include $file;
+						} else {
+							include "./front/main.php";
+						}
 
 						?>
 					</div>

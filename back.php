@@ -1,6 +1,10 @@
 ﻿<?php
-include_once "./base.php";
-
+include_once "base.php";
+// 判斷如果不是會員的都不能進後台
+if (!isset($_SESSION['user']) or $_SESSION['user'] !== 'admin') {
+	to("index.php");
+	exit();
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -38,21 +42,43 @@ include_once "./base.php";
 			<div class="hal" id="main">
 				<div>
 					<!-- marquee加入寬度 -->
-					<marquee  style="width:80%; display:inline-block;">請民眾踴躍投稿電子報，讓電子報成為大家互相交流、分享的園地!詳見最新文章</marquee>
+					<marquee style="width:80%; display:inline-block;">請民眾踴躍投稿電子報，讓電子報成為大家互相交流、分享的園地!詳見最新文章</marquee>
 					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
+						<?php
+						if (isset($_SESSION['user'])) {
+							if ($_SESSION['user'] === 'admin') {
+						?>
+								歡迎，<?= $_SESSION['user']; ?>
+								<button onclick="location.href='back.php'">管理</button>
+								|<button onclick='logout()'>登出</button>
+							<?php
+							} else {
+							?>
+								歡迎，<?= $_SESSION['user']; ?>
+								<button onclick='logout()'>登出</button>
+							<?php
+							}
+						} else {
+							?>
+							<a href="?do=login">會員登入</a>
+						<?php
+						}
+
+						?>
+
+
 					</span>
 					<div class="content">
 						<?php
-							// $do=isset($_GET['do'])?$_GET['do']:'main';
-							$do=$_GET['do']??'main';
-							$file="./back/".$do.".php";
-							
-							if(file_exists($file)){
-								include $file;
-							}else{
-								include "./back/main.php";
-							}
+						// $do=isset($_GET['do'])?$_GET['do']:'main';
+						$do = $_GET['do'] ?? 'main';
+						$file = "./back/" . $do . ".php";
+
+						if (file_exists($file)) {
+							include $file;
+						} else {
+							include "./back/main.php";
+						}
 
 						?>
 					</div>
