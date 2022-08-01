@@ -26,12 +26,29 @@
     function login(){
         // 先拿到帳號密碼的值
         let acc=$('#acc').val();
-        let pw=$("pw").val();
+        let pw=$("#pw").val();
         // AJAX
+        //查詢帳號是否存在
         $.post("./api/chk_acc.php",{acc},(res)=>{
-            console.log(res)
+            console.log('acc',res)
             if(parseInt(res)===1){
-                
+                // 檢查密碼
+                $.post("./api/chk_pw.php",{acc,pw},(res)=>{
+                    console.log('pw',res);
+                    if(parseInt(res)===1){
+                        // 收到$_SESSION['user']=$_POST['acc'];判別管理者還是一般使用者
+                        if(acc==='admin'){
+                            location.href='back.php';
+                        }else{
+                            // 一般使用者
+                            location.href='index.php';
+                        }
+                    }else{
+                        alert("密碼錯誤")
+                    }
+                })
+
+
             }else{
                 alert("查無帳號")
             }
