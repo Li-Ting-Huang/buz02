@@ -106,8 +106,8 @@ class DB{
         if(isset($arg[1])){
             $sql .= $arg[1];
         }
-        echo $sql;
-        return $this->pdo->query($sql)->fetchColumn(PDO::FETCH_ASSOC);
+        // echo $sql;
+        return $this->pdo->query($sql)->fetchColumn();
 
     }
 
@@ -127,6 +127,7 @@ function to($url){
 }
 
 $Total=new DB('total');
+$User=new DB('user');
 
 // print_r($Total->find(['date'=>'2022-07-28']));
 
