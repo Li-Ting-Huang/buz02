@@ -32,7 +32,7 @@ class DB{
         if(isset($arg[1])){
             $sql .= $arg[1];
         }
-        echo $sql;
+        // echo $sql;
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 //find
@@ -52,7 +52,7 @@ class DB{
             $sql .= " where `id`= '$arg'";
         
         }
-        echo $sql;
+        // echo $sql;
         //單筆
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -129,16 +129,21 @@ function to($url){
 $Total=new DB('total');
 $User=new DB('user');
 
-// print_r($Total->find(['date'=>'2022-07-28']));
+// print_r($Total->find(['date'=>'2022-08-02']));
 
-
+//如果沒有SESSION以下不執行
 if(!isset($_SESSION['total'])){
+    // 找到當天日期
+    $total=$Total->find(['date'=>date("Y-m-d")]);  
+    // 連覽+1
+    $total['total']=$total['total']+1;
+    // 儲存資料庫
+    $Total->save($total);
     
-        $total=$Total->find(['date'=>date("Y-m-d")]);   
-        
-        $total['total']++;
-        $Total->save($total);
-        
+    // 增加SESSION，所以有SESION此程式不會再重新回到上面重跑
+    $_SESSION['total']=$total['total'];
+
+  
     }
    
         

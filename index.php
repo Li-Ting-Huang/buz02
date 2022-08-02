@@ -22,7 +22,7 @@ include_once "./base.php";
 
 	<div id="all">
 		<div id="title">
-			<?= date("m 月 d 號 l"); ?> | 今日瀏覽:1| 累積瀏覽: 36 </div>
+			<?= date("m 月 d 號 l"); ?> | 今日瀏覽:<?=$Total->find(['date'=>date("Y-m-d")])['total'];?>| 累積瀏覽:<?=$Total->math('sum','total');?> </div>
 		<a href="index.php" style="float: right;">回首頁</a>
 		<div id="title2" title="間康促進網-回首頁" onclick="location.href='index.php'">
 			<img src="./icon/02B01.jpg" alt="">
