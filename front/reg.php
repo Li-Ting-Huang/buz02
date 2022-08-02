@@ -9,11 +9,11 @@
         </tr>
         <tr>
             <td class="clo">STEP2 : 登入密碼</td>
-            <td><input type="text" name="pw" id="pw"></td>
+            <td><input type="password" name="pw" id="pw"></td>
         </tr>
         <tr>
             <td class="clo">STEP3 : 再次確認密碼</td>
-            <td><input type="text" name="pw2" id="pw2"></td>
+            <td><input type="password" name="pw2" id="pw2"></td>
         </tr>
         <tr>
             <td class="clo">STEP4 : 信箱(忘記密碼時使用)</td>
