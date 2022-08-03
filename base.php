@@ -129,6 +129,7 @@ function to($url){
 $Total=new DB('total');
 $User=new DB('user');
 $News=new DB('news');
+$Que=new DB('que');
 
 // print_r($Total->find(['date'=>'2022-08-02']));
 
