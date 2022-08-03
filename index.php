@@ -47,6 +47,7 @@ include_once "./base.php";
 							if($_SESSION['user']==='admin'){
 							?>
 							歡迎，<?=$_SESSION['user']?>
+							<button onclick="location.href='back.php'">管理</button>
 							<button onclick="logout()">登出</button>
 							<!-- 管理者顯示end -->
 							<?php
