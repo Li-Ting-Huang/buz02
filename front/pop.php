@@ -27,17 +27,22 @@
                     <span class="summary"><?= mb_substr($row['text'], 0, 20); ?>...</span>
                     <!-- 改 -->
                     <div class="modal">
-                    <!-- <span class="full" style="display:none ;"> -->
-                        <?=nl2br($row['text']);?>
-                    <!-- </span> -->
+                        <!-- <span class="full" style="display:none ;"> -->
+                        <?= nl2br($row['text']); ?>
+                        <!-- </span> -->
                     </div>
                 </td>
-<!-- 按讚 -->
+                <!-- 按讚 -->
                 <td>
-                    <span><?=$row['good'];?></span>
+                    <span><?= $row['good']; ?></span>
                     個人按<img src="./icon/02B03.jpg" style="width:25px">
-                   
-                    <a class="great" href="#">讚</a>
+                    <!-- 讚功能做完做判斷是否為會員 -->
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        // News的data-id='{$row['id']}
+                        echo " - <a class='great' href='#'data-id='{$row['id']}'>>讚</a>";
+                    }
+                    ?>
                 </td>
             </tr>
         <?php
@@ -88,30 +93,39 @@
     //1+2 上面合併下面
 
     $('.title,.pop').hover(
-        function(){
+        function() {
             $(this).parent().find('.modal').show()
         },
-        function(){
+        function() {
             $(this).parent().find('.modal').hide()
         }
     )
 
 
-    $(".great").on("click",function(){
-        let text=$(this).text()
-        let num=parseInt($(this).siblings('span').text())
-        if(text==='讚'){
-            // 按讚收回
-            text=$(this).text('收回讚')
-            
-            // 按數字加減，siblings同辈元素
-            $(this).siblings('span').text(num+1)
-        }else{
-            text=$(this).text('讚')
+    $(".great").on("click", function() {
+        let type = $(this).text()
+        let num = parseInt($(this).siblings('span').text())
 
-            $(this).siblings('span').text(num-1)
+        //加入文章ID
+        let id = $(this).data('id')
+        $.post('./api/good.php', {
+            id,
+            type
+        }, () => {
+            // console.log(res);
+            if (type==='讚') {
+                // 按讚收回
+                $(this).text('收回讚')
 
-        }
+                // 按數字加減，siblings同辈元素
+                $(this).siblings('span').text(num + 1)
+            } else {
+                $(this).text('讚')
+                $(this).siblings('span').text(num - 1)
+
+            }
+        })
+
     })
 </script>
 

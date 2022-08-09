@@ -27,7 +27,15 @@
                     </span>
                 </td>
                 <!-- mb_substr取的部分字串 -->
-                <td></td>
+                <td>
+                    <?php
+                    // <!-- //複製pop.php -->
+                        if(isset($_SESSION['user'])){
+                            
+                            echo "<a class='great' href='#' data-id='{$row['id']}'>讚</a>";
+                        }
+                    ?>
+                </td>
             </tr>
         <?php
         }
