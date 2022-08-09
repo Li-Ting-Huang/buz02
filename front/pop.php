@@ -1,6 +1,6 @@
 <fieldset>
     <legend>目前位置 : 首頁 > 人氣文章區</legend>
-    <table id="news">
+    <table id="pop">
         <tr>
             <td width="30%">標題</td>
             <td width="50%">內容</td>
@@ -23,12 +23,13 @@
                 <td class="title clo" style="cursor: pointer;"><?= $row['title']; ?></td>
                 <!-- 加td class="pop" -->
                 <td class="pop">
+                    <!-- 改span因為切換要有DOM -->
                     <span class="summary"><?= mb_substr($row['text'], 0, 20); ?>...</span>
                     <!-- 改 -->
                     <div class="modal">
                     <!-- <span class="full" style="display:none ;"> -->
                         <?=nl2br($row['text']);?>
-                    </span>
+                    <!-- </span> -->
                     </div>
                 </td>
                 <!-- mb_substr取的部分字串 -->
@@ -59,7 +60,28 @@
 
 </fieldset>
 <script>
-    // 加.pop
+    // 1
+    // $(".title").hover(
+    //     function (){
+    //         $(this).next().children('.modal').show();
+    //     },
+    //     function (){
+    //         $(this).next().children('.modal').hide();
+    //     }
+    //     )
+
+    // 2
+    // $(".pop").hover(
+    //     function (){
+    //         $(this).children('.modal').show();
+    //     },
+    //     function (){
+    //         $(this).children('.modal').hide();
+    //     }
+    //     )
+
+    //1+2 上面合併下面
+
     $('.title,.pop').hover(
         function(){
             $(this).parent().find('.modal').show()
