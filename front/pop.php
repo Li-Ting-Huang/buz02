@@ -32,8 +32,13 @@
                     <!-- </span> -->
                     </div>
                 </td>
-                <!-- mb_substr取的部分字串 -->
-                <td></td>
+<!-- 按讚 -->
+                <td>
+                    <span><?=$row['good'];?></span>
+                    個人按<img src="./icon/02B03.jpg" style="width:25px">
+                   
+                    <a class="great" href="#">讚</a>
+                </td>
             </tr>
         <?php
         }
@@ -90,4 +95,25 @@
             $(this).parent().find('.modal').hide()
         }
     )
+
+
+    $(".great").on("click",function(){
+        let text=$(this).text()
+        let num=parseInt($(this).siblings('span').text())
+        if(text==='讚'){
+            // 按讚收回
+            text=$(this).text('收回讚')
+            
+            // 按數字加減，siblings同辈元素
+            $(this).siblings('span').text(num+1)
+        }else{
+            text=$(this).text('讚')
+
+            $(this).siblings('span').text(num-1)
+
+        }
+    })
 </script>
+
+<!-- jQuery的添加元素- append() / prepend() / after() / before() -->
+<!-- jQuery 遍历函数包括了用于筛选、查找和串联元素的方法。.parent().children().find() -->
