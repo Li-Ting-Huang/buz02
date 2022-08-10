@@ -36,12 +36,21 @@
                 <td>
                     <span><?= $row['good']; ?></span>
                     個人按<img src="./icon/02B03.jpg" style="width:25px">
-                    <!-- 讚功能做完做判斷是否為會員 -->
+                    <!-- 按讚功能做完做判斷是否為會員 -->
                     <?php
                     if (isset($_SESSION['user'])) {
-                        // News的data-id='{$row['id']}
-                        echo " - <a class='great' href='#' data-id='{$row['id']}'>讚</a>";
+                        // <!-- 按讚功能做完做判斷是否為會員 -->
+                        // news'=>$row['id']文章的ID和'user'=>$_SESSION['user']使用者=>判斷使用者有點那些文章
+                        // math('count','id',['news'=>$row['id'],'user'=>$_SESSION['user']])>0按讚過
+                        if($Log->math('count','id',['news'=>$row['id'],'user'=>$_SESSION['user']])>0){
+                            // 按讚功能須先加入News的data-id='{$row['id']}
+                        echo " - <a class='great' href='#' data-id='{$row['id']}'>收回讚</a>";
 
+                            
+                        }else{
+                        // 按讚功能須先加入News的data-id='{$row['id']}
+                        echo " - <a class='great' href='#' data-id='{$row['id']}'>讚</a>";
+                    }
                         
                     }
                     ?>
