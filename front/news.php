@@ -30,10 +30,21 @@
                 <td>
                     <?php
                     // <!-- //複製pop.php -->
-                        if(isset($_SESSION['user'])){
+                    if (isset($_SESSION['user'])) {
+                        // <!-- 按讚功能做完做判斷是否為會員 -->
+                        // news'=>$row['id']文章的ID和'user'=>$_SESSION['user']使用者=>判斷使用者有點那些文章
+                        // math('count','id',['news'=>$row['id'],'user'=>$_SESSION['user']])>0按讚過
+                        if($Log->math('count','id',['news'=>$row['id'],'user'=>$_SESSION['user']])>0){
+                            // 按讚功能須先加入News的data-id='{$row['id']}
+                        echo " <a class='great' href='#' data-id='{$row['id']}'>收回讚</a>";
+
                             
-                            echo "<a class='great' href='#' data-id='{$row['id']}'>讚</a>";
-                        }
+                        }else{
+                        // 按讚功能須先加入News的data-id='{$row['id']}
+                        echo " <a class='great' href='#' data-id='{$row['id']}'>讚</a>";
+                    }
+                        
+                    }
                     ?>
                 </td>
             </tr>
@@ -64,5 +75,31 @@
 <script>
     $('.title').on('click',function(){
         $(this).next().children().toggle()
+    })
+    //複製pop
+    $(".great").on("click", function() {
+        let type = $(this).text()
+        let num=parseInt($(this).siblings('span').text())
+
+        //加入文章ID
+        let id = $(this).data('id')
+        $.post('./api/good.php', {
+            id,
+            type
+        }, () => {
+            // console.log(res);
+            if (type==='讚') {
+                // 按讚收回
+                $(this).text('收回讚')
+
+                // 按數字加減，siblings同辈元素
+                $(this).siblings('span').text(num+1)
+            } else {
+                $(this).text('讚')
+                $(this).siblings('span').text(num-1)
+
+            }
+        })
+
     })
 </script>
