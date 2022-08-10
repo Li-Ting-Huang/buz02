@@ -40,7 +40,9 @@
                     <?php
                     if (isset($_SESSION['user'])) {
                         // News的data-id='{$row['id']}
-                        echo " - <a class='great' href='#'data-id='{$row['id']}'>>讚</a>";
+                        echo " - <a class='great' href='#' data-id='{$row['id']}'>讚</a>";
+
+                        
                     }
                     ?>
                 </td>
@@ -104,7 +106,7 @@
 
     $(".great").on("click", function() {
         let type = $(this).text()
-        let num = parseInt($(this).siblings('span').text())
+        let num=parseInt($(this).siblings('span').text())
 
         //加入文章ID
         let id = $(this).data('id')
@@ -118,10 +120,10 @@
                 $(this).text('收回讚')
 
                 // 按數字加減，siblings同辈元素
-                $(this).siblings('span').text(num + 1)
+                $(this).siblings('span').text(num+1)
             } else {
                 $(this).text('讚')
-                $(this).siblings('span').text(num - 1)
+                $(this).siblings('span').text(num-1)
 
             }
         })
